@@ -7,7 +7,7 @@ import { TransactionInterface } from './interfaces/transaction.interface';
 import { ConfigurationService } from './shared/configuration.service';
 @Injectable()
 export class AppService {
-  public blockCount = 10;
+  public blockCount = 100;
   private apiKey: string;
   private apiUrl: string;
 
@@ -54,12 +54,12 @@ export class AppService {
         const amountTransaction = new Big(
           currentTransactions[j].value
             .split('x')
-            .map((it) => parseInt(it, 16))
+            .map((it) => BigInt(parseInt(it, 16)).toString())
             .join('.'),
         );
-
         const from = currentTransactions[j].from;
         const to = currentTransactions[j].to;
+
         if (!amountTransactionMap.has(from)) {
           amountTransactionMap.set(from, new Big(0).minus(amountTransaction));
         } else {
@@ -81,12 +81,12 @@ export class AppService {
       }
     }
 
-    const [address, balance] = [...amountTransactionMap.entries()]
-      .map((it) => {
+    const [address, balance] = [...amountTransactionMap.entries()].reduce(
+      (acc, it) => {
         it[1] = it[1].abs();
-        return it;
-      })
-      .reduce((acc, it) => (it[1].gt(acc[1]) ? it : acc));
+        return it[1].gt(acc[1]) ? it : acc;
+      },
+    );
 
     return {
       value: balance,

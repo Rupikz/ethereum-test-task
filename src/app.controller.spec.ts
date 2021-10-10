@@ -1,5 +1,6 @@
 import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
+import Big from 'big.js';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MostChangedBalanceDto } from './dtos/most-changed-balance.dto';
@@ -26,11 +27,12 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
+    jest.setTimeout(240000);
     it('Проверка типа ответа', async () => {
       const result = await appController.mostChangedBalance();
       expect(result).toBeInstanceOf(MostChangedBalanceDto);
+      expect(result.value).toBeInstanceOf(Big);
       expect(typeof result.address).toBe('string');
-      expect(typeof result.value).toBe('number');
     });
   });
 });
