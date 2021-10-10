@@ -1,10 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { ConfigurationService } from './shared/configuration.service';
 
 async function bootstrap() {
-  const port = 3000;
   const app = await NestFactory.create(AppModule);
+  const configurationService = app.get(ConfigurationService);
+  const port = configurationService.port;
 
   app.setGlobalPrefix('api/v1.0');
   const options = new DocumentBuilder()

@@ -12,4 +12,7 @@ export class ConfigurationService {
   get etherscanApiUrl(): string {
     return this.configService.get('api.etherscan.url');
   }
+  get port(): string {
+    return this.configService.get('app.port');
+  }
 }

@@ -7,4 +7,7 @@ export default () => ({
       url: get('API_ETHERSCAN_URL').asString(),
     },
   },
+  app: {
+    port: get('APP_PORT').asPortNumber(),
+  },
 });
