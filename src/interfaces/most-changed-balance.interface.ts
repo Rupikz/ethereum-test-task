@@ -1,4 +1,6 @@
+import Big from 'big.js';
+
 export interface MostChangedBalanceInterface {
   address: string;
-  value: number;
+  value: Big;
 }
