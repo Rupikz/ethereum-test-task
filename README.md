@@ -29,6 +29,7 @@ https://api.etherscan.io/api?module=proxy&action=eth_blockNumber
 ## Запуск
 
 1. Переименовать файл **.example.env** в **.env**
-2. Указать свой апи-ключ от EtherscanApi в **API_ETHERSCAN_KEY**
+2. Указать свой апи-ключ от EtherscanApi в переменную **API_ETHERSCAN_KEY**
 3. Установить зависимости проекта командой `yarn`
 4. Запустить проект командой `yarn start`
+5. Перейти на документацию проекта по ссылке из консоли
